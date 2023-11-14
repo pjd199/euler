@@ -1,23 +1,29 @@
-from math import sqrt
 from functools import cache
-import numpy as np
-
+from math import ceil, sqrt
 
 @cache
 def sieve_of_eratosthenes(n: int) -> list[int]:
+    # numpy has an import overhead, so only import when needed
+    import numpy as np
+
+    # n must be higher than the smallest prime number
+    if n < 2:
+        return []
+
     # find all the prime number up to n,
-    # using the sieve of Eratosthenes
-    sieve = np.full(n, True, dtype=np.bool_)
+    # using the sieve of Eratosthenes. The sieve
+    # will only look at odd numbers as 2 is the only
+    # even prime number
+    sieve = np.full((n - 1) // 2, True, dtype=np.bool_)
     sieve[0] = False
-    sieve[1] = False
-    sieve[4::2] = False  # the only even prime is 2
 
     # perform the sieving action
-    for p in range(3, int(sqrt(len(sieve))) + 1, 2):
-        if sieve[p]:
-            sieve[p**2 :: p] = False
+    for i in range(0, (ceil(sqrt(n)) - 1) // 2):
+        if sieve[i]:
+            sieve[2 * i * (i + 1) :: 2 * i + 1] = False
+
     # return a list of prime numbers
-    return [i for i, x in enumerate(sieve) if x]
+    return [2] + [2 * i + 1 for i, x in enumerate(sieve) if x]
 
 
 def prime_iterator():
@@ -37,8 +43,8 @@ def is_prime(n: int) -> bool:
         return True  # two and three are primes
     if n % 2 == 0 or n % 3 == 0:
         return False  # check for simple divisors
-    
-    # now search for prime factors, using prime check in form of 6k +- 1  
+
+    # now search for prime factors, using prime check in form of 6k +- 1
     if any(n % f == 0 or n % (f + 2) == 0 for f in range(5, int(sqrt(n)) + 1, 6)):
         return False
 
