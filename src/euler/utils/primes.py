@@ -26,16 +26,6 @@ def sieve_of_eratosthenes(n: int) -> list[int]:
     return [2] + [2 * i + 1 for i, x in enumerate(sieve) if x]
 
 
-def prime_iterator():
-    # yield from the cached primes
-    primes = sieve_of_eratosthenes(1000)
-    next_index = 0
-    while True:
-        yield from primes[next_index:]
-        next_index = len(primes)
-        primes = sieve_of_eratosthenes(primes[-1] * 2)
-
-
 def is_prime(n: int) -> bool:
     if n <= 1:
         return False  # negative numbers, zero and one are not primes
