@@ -7,10 +7,10 @@ Project Euler Problem 16
 What is the sum of the digits of the number 2^1000?
 """
 
+from euler.utils.digits import split_digits
+
 def solution1() -> int:
-    return sum(int(x)
-        for x in str(2 ** 1000)
-    )
+    return sum(split_digits(2 ** 1000))
 
 def solution2() -> int:
     n = 2 ** 1000
@@ -21,4 +21,4 @@ def solution2() -> int:
     return result
 
 if __name__ == "__main__":
-    print(solution2())
+    print(solution1())
