@@ -45,3 +45,11 @@ def prime_factors_exp(n: int) -> list[int]:
 @cache
 def number_of_factors(n: int) -> int:
     return prod(exp + 1 for (_, exp) in prime_factors_exp(n))
+
+@cache
+def sum_of_factors(n: int) -> int:
+    return prod((f ** (exp + 1) - 1) / (f - 1) for (f, exp) in prime_factors_exp(n))
+
+@cache
+def proper_factors(n: int) -> set[int]:
+    return factors(n) - {n}
