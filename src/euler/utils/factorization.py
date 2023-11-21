@@ -1,6 +1,6 @@
 """Functions for finding factors."""
 from functools import cache
-from math import ceil, prod, sqrt
+from math import floor, prod, sqrt
 
 from euler.utils.prime_list import primes
 
@@ -8,7 +8,7 @@ from euler.utils.prime_list import primes
 @cache
 def factors(n: int) -> set[int]:
     found = {1, n}
-    for i in range(1, ceil(sqrt(n))):
+    for i in range(1, floor(sqrt(n)) + 1):
         if n % i == 0:
             found.add(i)
             found.add(n // i)
@@ -46,9 +46,11 @@ def prime_factors_exp(n: int) -> list[int]:
 def number_of_factors(n: int) -> int:
     return prod(exp + 1 for (_, exp) in prime_factors_exp(n))
 
+
 @cache
 def sum_of_factors(n: int) -> int:
     return prod((f ** (exp + 1) - 1) / (f - 1) for (f, exp) in prime_factors_exp(n))
+
 
 @cache
 def proper_factors(n: int) -> set[int]:
