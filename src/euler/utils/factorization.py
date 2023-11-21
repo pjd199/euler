@@ -55,3 +55,15 @@ def sum_of_factors(n: int) -> int:
 @cache
 def proper_factors(n: int) -> set[int]:
     return factors(n) - {n}
+
+@cache
+def is_perfect(n: int) -> bool:
+    return n == sum(proper_factors(n))
+
+@cache
+def is_deficient(n: int) -> bool:
+    return sum(proper_factors(n)) < n
+
+@cache
+def is_abundant(n: int) -> bool:
+    return sum(proper_factors(n)) > n
