@@ -26,18 +26,18 @@ divisors?
 """
 from itertools import count
 
-from euler.utils.factorization import factors, number_of_divisors
+from euler.utils.factorization import factors, number_of_factors
 
 
 def triangle(n: int) -> int:
     return (n**2 + n) // 2
 
 
-def number_of_divisors_of_triangle_number(n: int) -> int:
+def number_of_factors_of_triangle_number(n: int) -> int:
     if n % 2 == 0:
-        return number_of_divisors(n // 2) * number_of_divisors(n + 1)
+        return number_of_factors(n // 2) * number_of_factors(n + 1)
     else:
-        return number_of_divisors(n) * number_of_divisors((n + 1) / 2)
+        return number_of_factors(n) * number_of_factors((n + 1) / 2)
 
 
 def solution1() -> int:
@@ -48,13 +48,13 @@ def solution1() -> int:
 
 def solution2() -> int:
     for i in count(1):
-        if number_of_divisors(triangle(i)) > 500:
+        if number_of_factors(triangle(i)) > 500:
             return triangle(i)
 
 
 def solution3() -> int:
     for i in count(1):
-        if number_of_divisors_of_triangle_number(i) > 500:
+        if number_of_factors_of_triangle_number(i) > 500:
             return triangle(i)
 
 

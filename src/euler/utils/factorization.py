@@ -43,5 +43,5 @@ def prime_factors_exp(n: int) -> list[int]:
 
 
 @cache
-def number_of_divisors(n: int) -> int:
+def number_of_factors(n: int) -> int:
     return prod(exp + 1 for (_, exp) in prime_factors_exp(n))
