@@ -8,24 +8,20 @@ from the product of two 2-digit numbers is 9009 = 91 * 99.
 Find the largest palindrome made from the product of two 3-digit numbers.
 """
 
-
-def is_palindrome(n: int) -> bool:
-    return str(n) == str(n)[::-1]
+from euler.utils.digits import palindrome10
 
 
 def solution1() -> int:
     return max(
-        a * b
-        for a in range(100, 1000)
-        for b in range(100, 1000)
-        if is_palindrome(a * b)
+        a * b for a in range(100, 1000) for b in range(100, 1000) if palindrome10(a * b)
     )
 
 
 def solution2() -> int:
     return max(
-        a * b for a in range(100, 1000) for b in range(a, 1000) if is_palindrome(a * b)
+        a * b for a in range(100, 1000) for b in range(a, 1000) if palindrome10(a * b)
     )
+
 
 def solution3() -> int:
     largest = 0
@@ -34,7 +30,7 @@ def solution3() -> int:
         for b in range(start, a - 1, step):
             if (a * b) < largest:
                 break
-            if is_palindrome(a * b):
+            if palindrome10(a * b):
                 largest = a * b
 
     return largest

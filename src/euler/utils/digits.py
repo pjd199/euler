@@ -21,3 +21,27 @@ def pandigital(*args: int) -> bool:
     return all(v == 1 for v in counter.values()) and all(
         n in counter for n in range(1, len(counter) + 1)
     )
+
+
+@cache
+def palindrome2(n: int) -> bool:
+    s = f"{n:b}"
+    return s == s[::-1]
+
+
+@cache
+def palindrome8(n: int) -> bool:
+    s = f"{n:o}"
+    return s == s[::-1]
+
+
+@cache
+def palindrome10(n: int) -> bool:
+    s = f"{n:d}"
+    return s == s[::-1]
+
+
+@cache
+def palindrome16(n: int) -> bool:
+    s = f"{n:x}"
+    return s == s[::-1]
