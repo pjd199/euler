@@ -36,4 +36,3 @@ def solution2() -> int:
 
 if __name__ == "__main__":
     print(solution2())
-
