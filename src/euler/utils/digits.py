@@ -1,5 +1,4 @@
 from collections import Counter
-from collections.abc import Iterable
 from functools import cache
 from itertools import chain
 from math import floor, log10

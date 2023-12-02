@@ -30,7 +30,7 @@ def solution1() -> int:
     limit = 28123
     abundant = {n for n in range(12, limit) if is_abundant(n)}
     sums = {a + b for a, b in combinations_with_replacement(abundant, 2)}
-    return sum(n for n in range(1, limit) if not n in sums)
+    return sum(n for n in range(1, limit) if n not in sums)
 
 
 def solution2() -> int:
