@@ -14,6 +14,7 @@ COLIN would obtain a score of 938 * 53 = 49714.
 What is the total of all the name scores in the file?
 """
 
+
 def load_names() -> list[str]:
     with open("./resources/names.txt") as file:
         return [name.strip('"') for name in file.read().split(",")]

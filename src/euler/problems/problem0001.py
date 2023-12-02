@@ -21,7 +21,9 @@ def solution2() -> int:
     """Second solution.
 
     A little more sophiticated, calculating the sum of
-    (sum of all multiples of 3) + (sum of all multiples of 5) - (sum of all multiples of (3 * 5))
+    (sum of all multiples of 3)
+    + (sum of all multiples of 5)
+    - (sum of all multiples of (3 * 5))
     """
     threshold = 1000
 
@@ -30,6 +32,7 @@ def solution2() -> int:
         return n * (p * (p + 1)) // 2
 
     return sum_multiples_of(3) + sum_multiples_of(5) - sum_multiples_of(15)
+
 
 if __name__ == "__main__":
     print(solution2())

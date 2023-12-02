@@ -16,6 +16,7 @@ HINT: Some products can be obtained in more than one way so be sure to
 only include it once in your sum.
 """
 from math import floor, log10, sqrt
+
 from euler.utils.digits import pandigital
 
 

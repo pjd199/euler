@@ -32,7 +32,7 @@ What is the greatest product of four adjacent numbers in any direction
 (up, down, left, right, or diagonally) in the 20 * 20 grid?
 """
 from collections import deque
-from collections.abc import Iterator
+from collections.abc import Iterable, Iterator
 from itertools import islice
 from math import prod, sqrt
 
@@ -90,12 +90,14 @@ def solution1() -> int:
         ),
     )
 
-def sliding_window(iterable, n):
+
+def sliding_window(iterable: Iterable[int], n: int) -> tuple[int]:
     it = iter(iterable)
-    window = deque(islice(it, n-1), maxlen=n)
+    window = deque(islice(it, n - 1), maxlen=n)
     for x in it:
         window.append(x)
         yield tuple(window)
+
 
 def diagonal(array: list[list[int]], offset: int = 0) -> Iterator[int]:
     x, y = (0, -offset) if offset < 0 else (offset, 0)

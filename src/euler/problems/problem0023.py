@@ -23,6 +23,7 @@ Find the sum of all the positive integers which cannot be written as the
 sum of two abundant numbers.
 """
 from itertools import combinations_with_replacement
+
 from euler.utils.factorization import is_abundant
 
 

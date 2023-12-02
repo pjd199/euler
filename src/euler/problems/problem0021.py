@@ -31,7 +31,7 @@ def solution2() -> int:
 
 
 def solution3() -> int:
-    numbers = {i for i in range(1, 10000)}
+    numbers = set(range(1, 10000))
     amicable = set()
     while numbers:
         a = numbers.pop()

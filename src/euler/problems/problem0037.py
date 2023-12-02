@@ -13,7 +13,8 @@ to right and right to left.
 NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 """
 from functools import cache
-from euler.utils.digits import split_digits, join_digits
+
+from euler.utils.digits import join_digits, split_digits
 from euler.utils.prime_list import primes
 
 

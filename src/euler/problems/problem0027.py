@@ -27,6 +27,7 @@ expression that produces the maximum number of primes for consecutive
 values of n, starting with n = 0.
 """
 from itertools import product
+
 from euler.utils.prime_list import primes
 
 
@@ -51,12 +52,6 @@ def solution1() -> int:
                 longest = length
                 result = a * b
     return result
-
-    # return max(
-    #     (longest_quadratic_primes_sequence(a, b), a * b)
-    #     for a in coef
-    #     for b in coef
-    # )[1]
 
 
 if __name__ == "__main__":

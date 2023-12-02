@@ -12,11 +12,13 @@ exceed four million.
 """
 from itertools import takewhile
 
-from euler.utils.fibonacci import fibonacci 
+from euler.utils.fibonacci import fibonacci
+
 
 def solution1() -> int:
     """A simple solution."""
     return sum(x for x in takewhile(lambda n: n < 4000000, fibonacci()) if x % 2 == 0)
+
 
 if __name__ == "__main__":
     print(solution1())

@@ -39,7 +39,7 @@ def find_recurring_length(numerator: int, denominator: int) -> int:
         if (numerator, denominator) in patterns:
             return index - patterns[(numerator, denominator)]
         patterns[(numerator, denominator)] = index
-    
+
     return 0
 
 

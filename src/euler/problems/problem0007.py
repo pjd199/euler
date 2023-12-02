@@ -13,5 +13,6 @@ from euler.utils.prime_list import primes
 def solution1() -> int:
     return primes[10000]
 
+
 if __name__ == "__main__":
     print(solution1())

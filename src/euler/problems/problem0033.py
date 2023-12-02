@@ -17,6 +17,7 @@ terms, find the value of the denominator.
 """
 from collections import Counter
 from math import gcd
+
 from euler.utils.digits import split_digits
 
 
@@ -52,7 +53,12 @@ def solution2() -> int:
             singles = [x for x in split_digits(a) if x not in split_digits(b)] + [
                 x for x in split_digits(b) if x not in split_digits(a)
             ]
-            if len(singles) == 2 and a % 10 != 0 and b % 10 != 0 and (a / b) == (singles[0] / singles[1]):
+            if (
+                len(singles) == 2
+                and a % 10 != 0
+                and b % 10 != 0
+                and (a / b) == (singles[0] / singles[1])
+            ):
                 numerator *= singles[0]
                 denominator *= singles[1]
     return denominator // gcd(numerator, denominator)

@@ -15,21 +15,16 @@ from euler.utils.primes import sieve_of_eratosthenes
 
 
 def check(n: int) -> bool:
-    for i in range(1, 21):
-        if n % i != 0:
-            return False
-    return True
+    return all(n % i == 0 for i in range(2, 21))
 
 
 def solution1() -> int:
-    for i in count(2):
-        if check(i):
-            return i
+    return next(i for i in count(2) if check(i))
 
 
 def solution2() -> int:
     result = 1
-    upper = 20
+    upper = 21
     for prime in sieve_of_eratosthenes(upper):
         for i in count(1):
             if prime ** (i + 1) > upper:
@@ -41,3 +36,4 @@ def solution2() -> int:
 
 if __name__ == "__main__":
     print(solution2())
+

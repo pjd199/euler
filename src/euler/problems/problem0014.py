@@ -22,6 +22,7 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 """
 from functools import cache
 
+
 @cache
 def collatz_length(n: int) -> int:
     if n == 0:
@@ -30,28 +31,16 @@ def collatz_length(n: int) -> int:
         return 1
     if n % 2 == 0:
         return 1 + collatz_length(n // 2)
-    return 1 + collatz_length(((3 * n) + 1))
+    return 1 + collatz_length((3 * n) + 1)
 
 
-def solution1():
-    longest = 0
-    result = 0
-    for i in range(1000000):
-        x = collatz_length(i)
-        if x > longest:
-            longest = x
-            result = i
-    return result
+def solution1() -> int:
+    return max((collatz_length(i), i) for i in range(1000000))[1]
 
-def solution2():
-    longest = 0
-    result = 0
-    for i in range(500000, 1000000):
-        x = collatz_length(i)
-        if x > longest:
-            longest = x
-            result = i
-    return result
+
+def solution2() -> int:
+    return max((collatz_length(i), i) for i in range(500000, 1000000))[1]
+
 
 if __name__ == "__main__":
     print(solution2())

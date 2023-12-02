@@ -216,5 +216,6 @@ def solution1() -> int:
     result = sum(numbers)
     return result // 10 ** (floor(log10(result)) - 9)
 
+
 if __name__ == "__main__":
     print(solution1())

@@ -9,16 +9,19 @@ What is the sum of the digits of the number 2^1000?
 
 from euler.utils.digits import split_digits
 
+
 def solution1() -> int:
-    return sum(split_digits(2 ** 1000))
+    return sum(split_digits(2**1000))
+
 
 def solution2() -> int:
-    n = 2 ** 1000
+    n = 2**1000
     result = 0
     while n > 0:
-        result += (n % 10)
+        result += n % 10
         n //= 10
     return result
+
 
 if __name__ == "__main__":
     print(solution1())

@@ -1,5 +1,6 @@
 from collections.abc import Iterator
 
+
 def fibonacci() -> Iterator[int]:
     a = 1
     b = 1
@@ -8,4 +9,3 @@ def fibonacci() -> Iterator[int]:
     while True:
         a, b = b, a + b
         yield b
-

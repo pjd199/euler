@@ -36,26 +36,21 @@ def triangle(n: int) -> int:
 def number_of_factors_of_triangle_number(n: int) -> int:
     if n % 2 == 0:
         return number_of_factors(n // 2) * number_of_factors(n + 1)
-    else:
-        return number_of_factors(n) * number_of_factors((n + 1) / 2)
+    return number_of_factors(n) * number_of_factors((n + 1) / 2)
 
 
 def solution1() -> int:
-    for i in count(1):
-        if len(factors(triangle(i))) > 500:
-            return triangle(i)
+    return next(triangle(i) for i in count(1) if len(factors(triangle(i))) > 500)
 
 
 def solution2() -> int:
-    for i in count(1):
-        if number_of_factors(triangle(i)) > 500:
-            return triangle(i)
+    return next(triangle(i) for i in count(1) if number_of_factors(triangle(i)) > 500)
 
 
 def solution3() -> int:
-    for i in count(1):
-        if number_of_factors_of_triangle_number(i) > 500:
-            return triangle(i)
+    return next(
+        triangle(i) for i in count(1) if number_of_factors_of_triangle_number(i) > 500
+    )
 
 
 if __name__ == "__main__":
