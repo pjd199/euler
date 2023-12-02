@@ -20,6 +20,16 @@ classifiers = [
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
+dependencies = [
+    "numpy==1.26.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "EulerPy==1.4.0",
+    "pre-commit=3.5.0",
+]
+
 [tool.ruff]
 select = [
     "E",   # pycodestyle error
