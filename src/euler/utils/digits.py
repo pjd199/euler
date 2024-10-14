@@ -15,6 +15,11 @@ def join_digits(digits: tuple[int]) -> int:
 
 
 @cache
+def count_digits(*args: int) -> int:
+    return sum(len(split_digits(x)) for x in args)
+
+
+@cache
 def pandigital(*args: int) -> bool:
     counter = Counter(chain.from_iterable(split_digits(n) for n in args))
     return all(v == 1 for v in counter.values()) and all(
