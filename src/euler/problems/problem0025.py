@@ -26,7 +26,7 @@ The 12th term, F[12], is the first term to contain three digits.
 What is the first term in the Fibonacci sequence to contain 1000 digits?
 """
 
-from euler.utils.fibonacci import fibonacci
+from euler.utils.sequences import fibonacci
 
 
 def solution1() -> int:

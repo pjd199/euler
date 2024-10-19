@@ -10,9 +10,10 @@ previous two terms. By starting with 1 and 2, the first 10 terms will be:
 Find the sum of all the even-valued terms in the sequence which do not
 exceed four million.
 """
+
 from itertools import takewhile
 
-from euler.utils.fibonacci import fibonacci
+from euler.utils.sequences import fibonacci
 
 
 def solution1() -> int:
