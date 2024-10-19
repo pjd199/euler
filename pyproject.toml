@@ -12,6 +12,10 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+    "numpy==2.1",
+]
+
 
 [project.urls]
 "Homepage" = "https://github.com/pjd199/euler"
@@ -19,10 +23,6 @@ classifiers = [
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
-
-dependencies = [
-    "numpy==1.26.1",
-]
 
 [project.optional-dependencies]
 dev = [
