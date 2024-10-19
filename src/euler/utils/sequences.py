@@ -15,3 +15,8 @@ def fibonacci() -> Iterator[int]:
 def triangular() -> Iterator[int]:
     for n in count(1):
         yield (n * (n + 1)) // 2
+
+
+def pentagonal() -> Iterator[int]:
+    for n in count(1):
+        yield (n * (3 * n - 1)) // 2
