@@ -7,12 +7,15 @@ that the 6th prime is 13.
 
 What is the 10001st prime number?
 """
-from euler.utils.prime_list import primes
+
+from itertools import islice
+
+from euler.utils.primes import prime_generator
 
 
-def solution1() -> int:
-    return primes[10000]
+def solution() -> int:
+    return next(islice((x for x in prime_generator()), 10000, 10001))
 
 
 if __name__ == "__main__":
-    print(solution1())
+    print(solution())

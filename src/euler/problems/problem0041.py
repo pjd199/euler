@@ -18,8 +18,7 @@ def solution() -> int:
     pandigitals = [
         int("".join(x)) for r in range(1, 10) for x in permutations("7654321", r)
     ]
-    primes = {x for x in pandigitals if is_prime(x)}
-    return max(primes)
+    return max(x for x in pandigitals if is_prime(x))
 
 
 if __name__ == "__main__":

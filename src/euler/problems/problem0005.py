@@ -11,7 +11,7 @@ from 1 to 20?
 
 from itertools import count
 
-from euler.utils.primes import sieve_of_eratosthenes
+from euler.utils.primes import prime_generator
 
 
 def check(n: int) -> bool:
@@ -25,7 +25,7 @@ def solution1() -> int:
 def solution2() -> int:
     result = 1
     upper = 21
-    for prime in sieve_of_eratosthenes(upper):
+    for prime in prime_generator(upper):
         for i in count(1):
             if prime ** (i + 1) > upper:
                 result *= prime**i

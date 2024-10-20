@@ -26,27 +26,28 @@ Find the product of the coefficients, a and b, for the quadratic
 expression that produces the maximum number of primes for consecutive
 values of n, starting with n = 0.
 """
+
 from itertools import product
 
-from euler.utils.prime_list import primes
+from euler.utils.primes import is_prime, prime_generator
 
 
 def longest_quadratic_primes_sequence(a: int, b: int) -> int:
     n = 0
-    while ((n**2) + (a * n) + b) in primes:
+    while is_prime((n**2) + (a * n) + b):
         n += 1
 
     return n
 
 
-def solution1() -> int:
-    coef_a = [-x for x in primes if x < 1000]
-    coef_b = [x for x in primes if x < 1000]
+def solution() -> int:
+    coef_a = [-x for x in prime_generator(limit=1000)]
+    coef_b = list(prime_generator(limit=1000))
 
     longest = 0
     result = 0
     for a, b in product(coef_a, coef_b):
-        if (longest**2) + (a * longest) + b in primes:
+        if is_prime((longest**2) + (a * longest) + b):
             length = longest_quadratic_primes_sequence(a, b)
             if length > longest:
                 longest = length
@@ -55,4 +56,4 @@ def solution1() -> int:
 
 
 if __name__ == "__main__":
-    print(solution1())
+    print(solution())

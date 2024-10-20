@@ -1,8 +1,9 @@
 """Functions for finding factors."""
+
 from functools import cache
 from math import floor, prod, sqrt
 
-from euler.utils.prime_list import primes
+from euler.utils.primes import prime_generator
 
 
 @cache
@@ -18,9 +19,9 @@ def factors(n: int) -> set[int]:
 @cache
 def prime_factors(n: int) -> list[int]:
     found = []
-    prime_iter = iter(primes)
+    primes = prime_generator()
     while n > 1:
-        prime = next(prime_iter)
+        prime = next(primes)
         while n % prime == 0:
             found.append(prime)
             n //= prime
@@ -30,9 +31,9 @@ def prime_factors(n: int) -> list[int]:
 @cache
 def prime_factors_exp(n: int) -> list[int]:
     found = []
-    prime_iter = iter(primes)
+    primes = prime_generator()
     while n > 1:
-        prime = next(prime_iter)
+        prime = next(primes)
         exp = 0
         while n % prime == 0:
             exp += 1

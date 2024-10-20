@@ -24,34 +24,14 @@ divisors.
 What is the value of the first triangle number to have over five hundred
 divisors?
 """
-from itertools import count
 
-from euler.utils.factorization import factors, number_of_factors
-
-
-def triangle(n: int) -> int:
-    return (n**2 + n) // 2
+from euler.utils.factorization import number_of_factors
+from euler.utils.sequences import triangular
 
 
-def number_of_factors_of_triangle_number(n: int) -> int:
-    if n % 2 == 0:
-        return number_of_factors(n // 2) * number_of_factors(n + 1)
-    return number_of_factors(n) * number_of_factors((n + 1) / 2)
-
-
-def solution1() -> int:
-    return next(triangle(i) for i in count(1) if len(factors(triangle(i))) > 500)
-
-
-def solution2() -> int:
-    return next(triangle(i) for i in count(1) if number_of_factors(triangle(i)) > 500)
-
-
-def solution3() -> int:
-    return next(
-        triangle(i) for i in count(1) if number_of_factors_of_triangle_number(i) > 500
-    )
+def solution() -> int:
+    return next(x for x in triangular() if number_of_factors(x) > 500)
 
 
 if __name__ == "__main__":
-    print(solution3())
+    print(solution())

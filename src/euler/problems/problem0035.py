@@ -10,26 +10,27 @@ There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37,
 
 How many circular primes are there below one million?
 """
+
 from collections import deque
 
 from euler.utils.digits import join_digits, split_digits
-from euler.utils.prime_list import primes
-
-primes_under_one_million = {x for x in primes if x < 1000000}
+from euler.utils.primes import is_prime, sieve_of_eratosthenes
 
 
 def circular_prime(n: int) -> bool:
     digits = deque(split_digits(n))
+    if n != 2 and any(x % 2 == 0 for x in digits):
+        return False
     for _ in range(len(digits)):
-        if join_digits(tuple(digits)) not in primes_under_one_million:
+        if not is_prime(join_digits(tuple(digits))):
             return False
         digits.rotate(1)
     return True
 
 
-def solution1() -> int:
-    return sum(1 for n in primes_under_one_million if circular_prime(n))
+def solution() -> int:
+    return sum(1 for n in sieve_of_eratosthenes(1000000) if circular_prime(n))
 
 
 if __name__ == "__main__":
-    print(solution1())
+    print(solution())
