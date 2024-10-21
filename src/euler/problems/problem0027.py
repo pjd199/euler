@@ -41,8 +41,8 @@ def longest_quadratic_primes_sequence(a: int, b: int) -> int:
 
 
 def solution() -> int:
-    coef_a = [-x for x in prime_generator(limit=1000)]
-    coef_b = list(prime_generator(limit=1000))
+    coef_a = [-x for x in prime_generator(1000)]
+    coef_b = list(prime_generator(1000))
 
     longest = 0
     result = 0

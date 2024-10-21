@@ -3,11 +3,11 @@
 from functools import cache
 from math import floor, prod, sqrt
 
-from euler.utils.primes import prime_generator
+from euler.utils.primes import is_prime, prime_generator
 
 
 @cache
-def factors(n: int) -> set[int]:
+def factors(n: int) -> frozenset[int]:
     found = {1, n}
     for i in range(1, floor(sqrt(n)) + 1):
         if n % i == 0:
@@ -17,15 +17,14 @@ def factors(n: int) -> set[int]:
 
 
 @cache
-def prime_factors(n: int) -> list[int]:
-    found = []
-    primes = prime_generator()
-    while n > 1:
-        prime = next(primes)
-        while n % prime == 0:
-            found.append(prime)
-            n //= prime
-    return found
+def prime_factors(n: int) -> frozenset[int]:
+    if is_prime(n):
+        return {n}
+    if n > 1:
+        for x in prime_generator(n / 2):
+            if n % x == 0:
+                return {x, *prime_factors(n // x)}
+    return set()
 
 
 @cache
@@ -54,7 +53,7 @@ def sum_of_factors(n: int) -> int:
 
 
 @cache
-def proper_factors(n: int) -> set[int]:
+def proper_factors(n: int) -> frozenset[int]:
     return factors(n) - {n}
 
 
