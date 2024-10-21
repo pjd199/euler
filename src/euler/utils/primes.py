@@ -51,7 +51,7 @@ def sieve_of_eratosthenes(n: int) -> list[int]:
     sieve[0] = False
 
     # perform the sieving action
-    for i in range((ceil(sqrt(n)) - 1) // 2):
+    for i in range((ceil(sqrt(n))) // 2):
         if sieve[i]:
             sieve[2 * i * (i + 1) :: 2 * i + 1] = False
 
