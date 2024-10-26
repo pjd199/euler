@@ -1,22 +1,26 @@
 from collections import Counter
 from functools import cache
 from itertools import chain
-from math import floor, log10
 
 
 @cache
 def split_digits(n: int) -> tuple[int]:
-    return [(n // (10**i)) % 10 for i in range(floor(log10(n)), -1, -1)]
+    return tuple(map(int, str(n)))
 
 
 @cache
 def join_digits(digits: tuple[int]) -> int:
-    return sum(x * (10**i) for i, x in enumerate(reversed(digits)))
+    return int("".join(map(str, digits)))
 
 
 @cache
 def count_digits(*args: int) -> int:
     return sum(len(split_digits(x)) for x in args)
+
+
+@cache
+def reverse_digits(n: int) -> int:
+    return int(str(n)[::-1])
 
 
 @cache
