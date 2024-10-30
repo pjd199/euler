@@ -12,29 +12,32 @@ Find the lowest sum for a set of five primes for which any two primes
 concatenate to produce another prime.
 """
 
-from itertools import permutations
-
 from euler.utils.primes import is_prime, sieve_of_eratosthenes
 
 
-def check(primes: list[int]) -> bool:
-    return all(is_prime(int(str(a) + str(b))) for a, b in permutations(primes, 2))
+def find(primes: list[int], current: list[int], size: int) -> list[int]:
+    # found the solution
+    if len(current) == size:
+        return current
+
+    # minimise the search space by search larger primes
+    if len(current) > 0:
+        primes = primes[primes.index(current[-1]) + 1 :]
+
+    # try and find the next possible prime
+    for prime in primes:
+        if all(
+            is_prime(int(str(prime) + str(x))) and is_prime(int(str(x) + str(prime)))
+            for x in current
+        ):
+            result = find(primes, [*current, prime], size)
+            if result:
+                return result
+    return None
 
 
 def solution60() -> int:
-    primes = sieve_of_eratosthenes(10000)
-    for a in primes:
-        for b in primes:
-            if b > a and check([a, b]):
-                for c in primes:
-                    if c > b and check([a, b, c]):
-                        for d in primes:
-                            if d > c and check([a, b, c, d]):
-                                for e in primes:
-                                    if e > d and check([a, b, c, d, e]):
-                                        return sum([a, b, c, d, e])
-
-    return -1
+    return sum(find(sieve_of_eratosthenes(10000), [], 5))
 
 
 if __name__ == "__main__":
