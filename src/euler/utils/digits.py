@@ -15,7 +15,7 @@ def join_digits(digits: tuple[int]) -> int:
 
 @cache
 def count_digits(*args: int) -> int:
-    return sum(len(split_digits(x)) for x in args)
+    return sum(len(str(x)) for x in args)
 
 
 @cache
