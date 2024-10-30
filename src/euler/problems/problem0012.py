@@ -26,11 +26,11 @@ divisors?
 """
 
 from euler.utils.factorization import number_of_factors
-from euler.utils.sequences import triangular
+from euler.utils.sequences import polygonal
 
 
 def solution() -> int:
-    return next(x for x in triangular() if number_of_factors(x) > 500)
+    return next(x for x in polygonal(side=3) if number_of_factors(x) > 500)
 
 
 if __name__ == "__main__":

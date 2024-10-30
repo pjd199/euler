@@ -17,11 +17,11 @@ the value of D?
 
 from itertools import combinations, takewhile
 
-from euler.utils.sequences import pentagonal
+from euler.utils.sequences import polygonal
 
 
 def solution() -> int:
-    pentagonals = set(takewhile(lambda n: n < 10000000, pentagonal()))
+    pentagonals = set(takewhile(lambda n: n < 10000000, polygonal(side=5)))
     return min(
         abs(a - b)
         for a, b in combinations(pentagonals, 2)

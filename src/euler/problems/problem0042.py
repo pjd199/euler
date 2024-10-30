@@ -18,7 +18,7 @@ English words, how many are triangle words?
 
 from itertools import takewhile
 
-from euler.utils.sequences import triangular
+from euler.utils.sequences import polygonal
 
 
 def load_words() -> list[str]:
@@ -33,7 +33,7 @@ def word_value(word: str) -> int:
 def solution() -> int:
     values = [word_value(word) for word in load_words()]
     max_value = max(values)
-    triangular_numbers = set(takewhile(lambda n: n <= max_value, triangular()))
+    triangular_numbers = set(takewhile(lambda n: n <= max_value, polygonal(side=3)))
     return sum(1 for value in values if value in triangular_numbers)
 
 

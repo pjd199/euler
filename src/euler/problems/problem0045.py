@@ -16,14 +16,14 @@ Find the next triangle number that is also pentagonal and hexagonal.
 
 from itertools import islice
 
-from euler.utils.sequences import is_hexagonal, is_pentagonal, triangular
+from euler.utils.sequences import is_polygonal, polygonal
 
 
 def solution() -> int:
     return next(
         x
-        for x in islice(triangular(), 285, None)
-        if is_pentagonal(x) and is_hexagonal(x)
+        for x in islice(polygonal(side=3), 285, None)
+        if is_polygonal(x, side=5) and is_polygonal(x, side=6)
     )
 
 
