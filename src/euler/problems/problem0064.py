@@ -68,7 +68,7 @@ How many continued fractions for N 10000 have an odd period?
 from math import sqrt
 
 
-def continued_fraction_root(n: int) -> tuple[int, tuple[int]]:
+def continued_fraction_root(n: int) -> tuple[int, tuple[int, ...] | tuple[()]]:
     if sqrt(n).is_integer():
         return (int(sqrt(n)), ())
     m = 0

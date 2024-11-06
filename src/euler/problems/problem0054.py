@@ -79,7 +79,7 @@ class Card:
         self.value = card_values_decoder[card[0]]
         self.suit = card[1]
 
-    value: str
+    value: int
     suit: str
 
 

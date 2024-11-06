@@ -14,10 +14,11 @@ COLIN would obtain a score of 938 * 53 = 49714.
 What is the total of all the name scores in the file?
 """
 
+from euler.utils.resources import load_resource
+
 
 def load_names() -> list[str]:
-    with open("./resources/names.txt") as file:
-        return [name.strip('"') for name in file.read().split(",")]
+    return [name.strip('"') for name in load_resource("names").split(",")]
 
 
 def alphabetical_value(word: str) -> int:
@@ -25,7 +26,12 @@ def alphabetical_value(word: str) -> int:
 
 
 def solution1() -> int:
-    names = {name: i + 1 for i, name in enumerate(sorted(load_names()))}
+    names = {
+        name: i + 1
+        for i, name in enumerate(
+            sorted([name.strip('"') for name in load_resource("names").split(",")])
+        )
+    }
     return sum(alphabetical_value(name) * names[name] for name in names)
 
 

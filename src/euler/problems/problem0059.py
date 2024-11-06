@@ -31,18 +31,14 @@ in the original text.
 """
 
 from itertools import cycle, product
-from pkgutil import get_data
 from string import ascii_lowercase
+
+from euler.utils.resources import load_resource
 
 
 def solution59() -> int:
     # load the data file
-    data = [
-        chr(int(x))
-        for x in get_data("euler.problems", "resources/cipher1.txt")
-        .decode("utf-8")
-        .split(",")
-    ]
+    data = [chr(int(x)) for x in load_resource("cipher1").split(",")]
 
     # find the secret key
     key = next(

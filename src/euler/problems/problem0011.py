@@ -31,6 +31,7 @@ The product of these numbers is 26 * 63 * 78 * 14 = 1788696.
 What is the greatest product of four adjacent numbers in any direction
 (up, down, left, right, or diagonally) in the 20 * 20 grid?
 """
+
 from collections import deque
 from collections.abc import Iterable, Iterator
 from itertools import islice
@@ -58,40 +59,7 @@ numbers = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
        01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48""".split()
 
 
-def solution1() -> int:
-    import numpy as np
-
-    side = int(sqrt(len(numbers)))
-
-    grid = np.array([int(x) for x in numbers]).reshape(side, side)
-
-    return max(
-        # check horizontal rows
-        max(
-            np.lib.stride_tricks.sliding_window_view(grid[i, :], 4).prod(1).max()
-            for i in range(len(grid))
-        ),
-        # check vertical rows
-        max(
-            np.lib.stride_tricks.sliding_window_view(grid[:, i], 4).prod(1).max()
-            for i in range(len(grid))
-        ),
-        # check left-right diagonals
-        max(
-            np.lib.stride_tricks.sliding_window_view(grid.diagonal(i), 4).prod(1).max()
-            for i in range(4 - len(grid), len(grid) - 3)
-        ),
-        # check right-left diagonals
-        max(
-            np.lib.stride_tricks.sliding_window_view(np.fliplr(grid).diagonal(i), 4)
-            .prod(1)
-            .max()
-            for i in range(4 - len(grid), len(grid) - 3)
-        ),
-    )
-
-
-def sliding_window(iterable: Iterable[int], n: int) -> tuple[int]:
+def sliding_window(iterable: Iterable[int], n: int) -> Iterator[tuple[int, ...]]:
     it = iter(iterable)
     window = deque(islice(it, n - 1), maxlen=n)
     for x in it:
@@ -110,7 +78,7 @@ def fliplr(array: list[list[int]]) -> list[list[int]]:
     return [row[-1::-1] for row in array]
 
 
-def solution2() -> int:
+def solution11() -> int:
     side = int(sqrt(len(numbers)))
     flat = [int(x) for x in numbers]
     grid = [[int(x) for x in numbers[i * side : (i + 1) * side]] for i in range(side)]
@@ -136,4 +104,4 @@ def solution2() -> int:
 
 
 if __name__ == "__main__":
-    print(solution2())
+    print(solution11())

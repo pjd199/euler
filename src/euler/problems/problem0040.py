@@ -26,7 +26,7 @@ from euler.utils.digits import split_digits
 def solution() -> int:
     # iterator for the number sequence
     def seq() -> Iterator[int]:
-        yield [0]
+        yield 0
         for i in count(1):
             yield from split_digits(i)
 

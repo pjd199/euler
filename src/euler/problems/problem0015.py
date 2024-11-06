@@ -32,7 +32,7 @@ def solution3() -> int:
     n = 20
     result = 1
     for i in range(1, n + 1):
-        result *= (n + i) / i
+        result *= (n + i) // i
     return ceil(result)
 
 

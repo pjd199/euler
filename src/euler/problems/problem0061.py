@@ -50,7 +50,7 @@ def solution61() -> int:
         for i in range(3, 9)
     }
     # create a lookup based on the first two digits of each number
-    head_lookup = {}
+    head_lookup: dict[int, dict[str, set[str]]] = {}
     for rank in sequences:
         for number in sequences[rank]:
             head_lookup.setdefault(rank, {}).setdefault(number[:2], set()).add(number)

@@ -13,23 +13,23 @@ def factors(n: int) -> frozenset[int]:
         if n % i == 0:
             found.add(i)
             found.add(n // i)
-    return found
+    return frozenset(found)
 
 
 @cache
 def prime_factors(n: int) -> frozenset[int]:
     if is_prime(n):
-        return {n}
+        return frozenset({n})
     if n > 1:
-        for x in prime_generator(n / 2):
+        for x in prime_generator(n // 2):
             if n % x == 0:
-                return {x, *prime_factors(n // x)}
-    return set()
+                return frozenset({x, *prime_factors(n // x)})
+    return frozenset()
 
 
 @cache
-def prime_factors_exp(n: int) -> list[int]:
-    found = []
+def prime_factors_exp(n: int) -> list[tuple[int, int]]:
+    found: list[tuple[int, int]] = []
     primes = prime_generator()
     while n > 1:
         prime = next(primes)
@@ -49,7 +49,9 @@ def number_of_factors(n: int) -> int:
 
 @cache
 def sum_of_factors(n: int) -> int:
-    return prod((f ** (exp + 1) - 1) / (f - 1) for (f, exp) in prime_factors_exp(n))
+    return int(
+        prod((f ** (exp + 1) - 1) // (f - 1) for (f, exp) in prime_factors_exp(n))
+    )
 
 
 @cache

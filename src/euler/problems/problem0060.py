@@ -25,7 +25,7 @@ def find(primes: list[int], current: list[int], size: int) -> list[int]:
         primes = primes[primes.index(current[-1]) + 1 :]
 
     # try and find the next possible prime
-    for prime in primes:  # noqa: RET503
+    for prime in primes:
         if all(
             is_prime(int(str(prime) + str(x))) and is_prime(int(str(x) + str(prime)))
             for x in current
@@ -33,6 +33,7 @@ def find(primes: list[int], current: list[int], size: int) -> list[int]:
             result = find(primes, [*current, prime], size)
             if result:
                 return result
+    return []  # pragma: no cover
 
 
 def solution60() -> int:

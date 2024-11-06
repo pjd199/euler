@@ -5,7 +5,7 @@ from itertools import takewhile
 from math import ceil, sqrt
 
 _sieve_cache = deque([2])
-_sieve_data = {}
+_sieve_data: dict[int, int] = {}
 _sieve_location = 3
 
 
@@ -28,10 +28,10 @@ def _caching_prime_generator() -> Iterator[int]:
         _sieve_location += 2
 
 
-def prime_generator(n: int | None = None) -> Iterator[int]:
-    if n is None:
+def prime_generator(limit: int | None = None) -> Iterator[int]:
+    if limit is None:
         return _caching_prime_generator()
-    return takewhile(lambda x: x <= n, _caching_prime_generator())
+    return takewhile(lambda x: x <= limit, _caching_prime_generator())
 
 
 @cache

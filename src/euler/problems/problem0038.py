@@ -18,14 +18,15 @@ of 9 and (1,2,3,4,5).
 What is the largest 1 to 9 pandigital 9-digit number that can be formed as
 the concatenated product of an integer with (1,2, ... , n) where n > 1?
 """
+
 from euler.utils.digits import join_digits, pandigital, split_digits
 
 
-def solution1() -> int:
+def solution38() -> int:
     largest = 0
     for value in range(1, 10000):
         factor = 1
-        result = []
+        result: list[int] = []
         while len(result) < 10:
             r = split_digits(value * factor)
             if len(result) + len(r) < 10:
@@ -40,4 +41,4 @@ def solution1() -> int:
 
 
 if __name__ == "__main__":
-    print(solution1())
+    print(solution38())

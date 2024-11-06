@@ -15,12 +15,14 @@ from itertools import count
 
 
 def solution62() -> int:
-    counter = {}
-    for i in count():  # noqa: RET503
+    counter: dict[str, list[int]] = {}
+    for i in count():
         cube = "".join(sorted(str(i**3)))
         counter.setdefault(cube, []).append(i)
         if len(counter[cube]) == 5:
             return min(counter[cube]) ** 3
+
+    return -1  # pragma: no cover
 
 
 if __name__ == "__main__":

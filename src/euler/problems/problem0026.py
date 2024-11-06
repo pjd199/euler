@@ -28,7 +28,7 @@ def find_recurring_length(numerator: int, denominator: int) -> int:
         return 0
 
     numerator %= denominator
-    patterns = {}
+    patterns: dict[tuple[int, int], int] = {}
     index = 0
 
     while numerator > 0:

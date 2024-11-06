@@ -37,8 +37,8 @@ def solution1() -> int:
                 and a % 10 != 0
                 and b % 10 != 0
             ):
-                digits_a = [x for x in digits_a if counter[x] == 1]
-                digits_b = [x for x in digits_b if counter[x] == 1]
+                digits_a = tuple(x for x in digits_a if counter[x] == 1)
+                digits_b = tuple(x for x in digits_b if counter[x] == 1)
                 if (a / b) == (digits_a[0] / digits_b[0]):
                     numerator *= digits_a[0]
                     denominator *= digits_b[0]

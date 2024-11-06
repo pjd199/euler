@@ -4,12 +4,12 @@ from itertools import chain
 
 
 @cache
-def split_digits(n: int) -> tuple[int]:
+def split_digits(n: int) -> tuple[int, ...]:
     return tuple(map(int, str(n)))
 
 
 @cache
-def join_digits(digits: tuple[int]) -> int:
+def join_digits(digits: tuple[int, ...]) -> int:
     return int("".join(map(str, digits)))
 
 

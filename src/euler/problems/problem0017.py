@@ -17,7 +17,7 @@ from functools import cache
 
 
 @cache
-def digits_to_words(n: int) -> int:
+def digits_to_words(n: int) -> str:
     lookup = {
         0: "zero",
         1: "one",
