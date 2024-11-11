@@ -19,6 +19,11 @@ def count_digits(*args: int) -> int:
 
 
 @cache
+def sum_digits(*args: int) -> int:
+    return sum(sum(split_digits(x)) for x in args)
+
+
+@cache
 def reverse_digits(n: int) -> int:
     return int(str(n)[::-1])
 
