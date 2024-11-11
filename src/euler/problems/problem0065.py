@@ -50,35 +50,23 @@ The sum of digits in the numerator of the 10th convergent is 1+4+5+7=17.
 Find the sum of digits in the numerator of the 100th convergent of the
 continued fraction for e.
 """
-from functools import cache
+from collections.abc import Iterator
+from itertools import count, islice
 
+from euler.utils.continued_fractions import convergents
 from euler.utils.digits import sum_digits
 
 
-@cache
-def multipliers(n: int) -> int:
-    match (n):
-        case 0:
-            return 2
-        case i if i % 3 == 2:
-            return 2 + 2 * (i // 3)
-        case _:
-            return 1
-
-
-@cache
-def numerators(n: int) -> int:
-    match n:
-        case 0:
-            return 1
-        case 1:
-            return 2
-        case _:
-            return multipliers(n - 1) * numerators(n - 1) + numerators(n - 2)
+def e_constant_denominators() -> Iterator[int]:
+    for i in count():
+        yield from (1, 2 + 2 * i, 1)
 
 
 def solution65() -> int:
-    return sum_digits(numerators(100))
+    whole = 2
+    denominators = tuple(islice(e_constant_denominators(), 100))
+    fraction = next(islice(convergents(whole, denominators), 99, 100))
+    return sum_digits(fraction.numerator)
 
 
 if __name__ == "__main__":

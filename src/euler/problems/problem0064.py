@@ -64,29 +64,11 @@ Exactly four continued fractions, for N 13, have an odd period.
 
 How many continued fractions for N 10000 have an odd period?
 """
-
-from math import sqrt
-
-
-def continued_fraction_root(n: int) -> tuple[int, tuple[int, ...] | tuple[()]]:
-    if sqrt(n).is_integer():
-        return (int(sqrt(n)), ())
-    m = 0
-    d = 1
-    a0 = int(sqrt(n))
-    a = a0
-    end = 2 * a
-    digits = []
-    while a < end:
-        m = d * a - m
-        d = (n - m**2) // d
-        a = (a0 + m) // d
-        digits.append(a)
-    return (a0, tuple(digits))
+from euler.utils.continued_fractions import square_root
 
 
 def solution64() -> int:
-    return sum(1 for x in range(10001) if len(continued_fraction_root(x)[1]) % 2 == 1)
+    return sum(1 for x in range(10001) if len(square_root(x)[1]) % 2 == 1)
 
 
 if __name__ == "__main__":
