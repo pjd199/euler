@@ -37,7 +37,6 @@ Find the value of n 1,000,000 for which n/f(n) is a maximum.
 from itertools import accumulate, takewhile
 from operator import mul
 
-from euler.utils.factorization import prime_factors_exp
 from euler.utils.primes import prime_generator
 
 
@@ -53,7 +52,4 @@ def solution0069() -> int:
 
 
 if __name__ == "__main__":
-    for i in range(100000):
-        prime_factors_exp(i)
-
     print(solution0069())
