@@ -1,7 +1,8 @@
 """Functions for finding factors."""
 
 from functools import cache
-from math import floor, prod, sqrt
+from math import floor, gcd, prod, sqrt
+from random import randint
 
 from euler.utils.primes import is_prime, prime_generator
 
@@ -27,19 +28,56 @@ def prime_factors(n: int) -> frozenset[int]:
     return frozenset()
 
 
+def pollard_rho_with_brent(n: int) -> int:
+    if n % 2 == 0:
+        return 2
+    if n < 2:
+        return n
+
+    y = randint(1, n - 1)  # noqa: S311
+    c = randint(1, n - 1)  # noqa: S311
+    m = randint(1, n - 1)  # noqa: S311
+    g = 1
+    r = 1
+    q = 1
+    x = y
+    ys = 0
+
+    while g == 1:
+        x = y
+        for _ in range(r):
+            y = (y * y + c) % n
+
+        k = 0
+        while k < r and g == 1:
+            ys = y
+            for _ in range(min(m, r - k)):
+                y = (y * y + c) % n
+                q = q * abs(x - y) % n
+            g = gcd(q, n)
+            k += m
+        r *= 2
+
+    if g == n:
+        while True:
+            ys = (ys * ys + c) % n
+            g = gcd(abs(x - ys), n)
+            if g > 1:
+                break
+    return g
+
+
 @cache
-def prime_factors_exp(n: int) -> list[tuple[int, int]]:
-    found: list[tuple[int, int]] = []
-    primes = prime_generator()
+def prime_factors_exp(n: int) -> tuple[tuple[int, int], ...]:
+    factors: dict[int, int] = {}
     while n > 1:
-        prime = next(primes)
-        exp = 0
-        while n % prime == 0:
-            exp += 1
-            n //= prime
-        if exp > 0:
-            found.append((prime, exp))
-    return found
+        factor = pollard_rho_with_brent(n)
+        if is_prime(factor):
+            while n % factor == 0:
+                n = n // factor
+                factors[factor] = factors.get(factor, 0) + 1
+
+    return tuple(sorted(factors.items()))
 
 
 @cache
