@@ -34,21 +34,12 @@ It can be seen that n=6 produces a maximum n/f(n) for n 10.
 Find the value of n 1,000,000 for which n/f(n) is a maximum.
 """
 
-from itertools import accumulate, takewhile
-from operator import mul
-
-from euler.utils.primes import prime_generator
+from euler.utils.euler_totient import totients_sieve
 
 
 def solution0069() -> int:
     limit = 1000000
-    return int(
-        next(
-            reversed(
-                list(takewhile(lambda x: x < limit, accumulate(prime_generator(), mul)))
-            )
-        )
-    )
+    return max((n / phi, n) for n, phi in enumerate(totients_sieve(limit + 1)))[1]
 
 
 if __name__ == "__main__":

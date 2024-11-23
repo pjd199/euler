@@ -58,3 +58,8 @@ def palindrome10(n: int) -> bool:
 def palindrome16(n: int) -> bool:
     s = f"{n:x}"
     return s == s[::-1]
+
+
+@cache
+def is_anagram(a: int, b: int) -> bool:
+    return sorted(str(a)) == sorted(str(b))
