@@ -1,4 +1,5 @@
 from collections.abc import Iterator
+from fractions import Fraction
 from itertools import count
 from math import sqrt
 
@@ -22,3 +23,14 @@ def is_polygonal(n: int, side: int) -> bool:
     return (
         (sqrt((8 * (side - 2) * n) + (side - 4) ** 2) + (side - 4)) / (2 * (side - 2))
     ).is_integer()
+
+
+def farey(limit: int, descending: bool = False) -> Iterator[Fraction]:
+    a, b, c, d = 0, 1, 1, limit
+    if descending:
+        a, c = 1, limit - 1
+    yield Fraction(a, b)
+    while 0 <= c <= limit:
+        k = (limit + b) // d
+        a, b, c, d = c, d, k * c - a, k * d - b
+        yield Fraction(a, b)
