@@ -12,26 +12,30 @@ _sieve_location = 3
 def _caching_prime_generator() -> Iterator[int]:
     # from https://eli.thegreenplace.net/2023/my-favorite-prime-number-generator/
     global _sieve_cache, _sieve_data, _sieve_location
-    yield from _sieve_cache
+    i = 0
+    while i < len(_sieve_cache):
+        yield _sieve_cache[i]
+        i += 1
 
     while True:
         p = _sieve_data.pop(_sieve_location, None)
         if not p:
             _sieve_data[_sieve_location**2] = _sieve_location
             _sieve_cache.append(_sieve_location)
-            yield _sieve_location
+            _sieve_location += 2
+            yield _sieve_location - 2
         else:
             x = _sieve_location + p + p  # get odd multiples
             while x in _sieve_data:
                 x += p + p
             _sieve_data[x] = p
-        _sieve_location += 2
+            _sieve_location += 2
 
 
 def prime_generator(limit: int | None = None) -> Iterator[int]:
     if limit is None:
         return _caching_prime_generator()
-    return takewhile(lambda x: x <= limit, _caching_prime_generator())
+    return takewhile(lambda x: x < limit, _caching_prime_generator())
 
 
 @cache
